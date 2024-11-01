@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ConvexClientProvider } from "./convex-client-provider";
-import {ClerkProvider } from "@clerk/nextjs"
+import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider dynamic>
-      <body><ConvexClientProvider>{children}</ConvexClientProvider></body>
+        <body>
+          <ConvexClientProvider>
+            {children}
+            <Toaster />
+          </ConvexClientProvider>
+        </body>
       </ClerkProvider>
     </html>
   );
