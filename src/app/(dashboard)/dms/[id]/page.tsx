@@ -73,7 +73,7 @@ function MessageActions() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem className="text-destructive">
-          <TrashIcon>Delete</TrashIcon>
+          <TrashIcon /> <span>Delete</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
