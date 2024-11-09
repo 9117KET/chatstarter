@@ -12,10 +12,36 @@ import { SidebarGroupAction } from "@/components/ui/sidebar";
 import { Label } from "@/components/ui/label";
 import { PlusIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { useMutation } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import router from "next/router";
 
 export function NewDirectMessage() {
+  
+  const [open, setOpen] = useState(false);
+  const createDirectMessage = useMutation(
+    api.functions.dm.create
+  );
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try{
+      const id = await createDirectMessage({ username: e.currentTarget.username.value});
+      setOpen(false);
+      router.push(`/dms/${id}`);
+    }catch (error){
+      toast.error("Failed to create direct message", {
+        description:
+        error instanceof Error ? error.message : "An unknown error occured",
+      });
+    }
+    
+  };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <SidebarGroupAction>
           <PlusIcon />
@@ -30,7 +56,7 @@ export function NewDirectMessage() {
             Enter a username to start a direct message.
           </DialogDescription>
         </DialogHeader>
-        <form className="contents">
+        <form className="contents" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1">
             <Label htmlFor="contents"></Label>
             <Input id="username" type="text" />
