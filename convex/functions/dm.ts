@@ -84,21 +84,21 @@ export const create = authenticatedMutation({
         }
         
         // Create a new direct message
-        const newDirectMesage = await ctx.db.insert("directMessages", {});
+        const newDirectMessage = await ctx.db.insert("directMessages", {});
         
         // Insert the new direct message membership for the current user
         await ctx.db.insert("directMessageMembers", {
             users: ctx.user._id,
-            directMessage: newDirectMesage,
+            directMessage: newDirectMessage,
         });
         
         // Insert the new direct message membership for the other user
         await ctx.db.insert("directMessageMembers", {
             users: user._id,
-            directMessage: newDirectMesage,
+            directMessage: newDirectMessage,
         });
         
-        return newDirectMesage;
+        return newDirectMessage;
     },
 });
 
