@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreVerticalIcon, SendIcon, TrashIcon, UserMinus } from "lucide-react";
+import { MoreVerticalIcon, SendIcon, TrashIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Id } from "../../../../../convex/_generated/dataModel";
@@ -133,3 +133,6 @@ function MessageInput({
     </form>
   );
 }
+
+
+//1:16:14
